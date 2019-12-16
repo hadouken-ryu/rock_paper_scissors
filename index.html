@@ -25,7 +25,7 @@
             while (!choiceIsValid) {
                 selection = prompt('Pick one the three: rock, paper, scissors', 'scissors');
 
-                // Turn the input into all lower caps and capitalize its first letter
+                // Turn the input into all lower caps first, and then capitalize its first letter
                 selection = selection.toLowerCase();
                 selection = selection.charAt(0).toUpperCase() + selection.slice(1)
 
@@ -35,8 +35,6 @@
                     choiceIsValid = true;
                 }
             }
-
-
 
             return selection;
         }
@@ -60,47 +58,41 @@
         }
 
 
-        // Decide if there is a draw, or who wins the round.
-        // Also produce console output accordingly.
+        // Judge if there is a draw, or who wins the round.
+        // Also return output accordingly.
         let playRound = function (playerSelection, computerSelection) {
             let endOfRound = '';
-            console.log(playerSelection); //debugging
-            console.log(computerSelection); //debugging
 
             if (playerSelection === computerSelection) {
                 endOfRound = "It's a draw!";
-            } else if (playerSelection === 'Rock' && computerSelection === 'Paper') {
+            } else if (playerSelection === 'Rock' && computerSelection === 'Paper' ||
+                playerSelection === 'Paper' && computerSelection === 'Scissors' ||
+                playerSelection === 'Scissors' && computerSelection === 'Rock') {
                 endOfRound = `You Lose! ${computerSelection} beats ${playerSelection}`;
-            } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
-                endOfRound = `You Win! ${playerSelection} beats ${computerSelection}`;
-            } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
-                endOfRound = `You Win! ${playerSelection} beats ${computerSelection}`;
-            } else if (playerSelection === 'Paper' && computerSelection === 'Scissors') {
-                endOfRound = `You Lose! ${computerSelection} beats ${playerSelection}`;
-            } else if (playerSelection === 'Scissors' && computerSelection === 'Rock') {
-                endOfRound = `You Lose! ${computerSelection} beats ${playerSelection}`;
-            } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
+            } else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
+                playerSelection === 'Paper' && computerSelection === 'Rock' ||
+                playerSelection === 'Scissors' && computerSelection === 'Paper') {
                 endOfRound = `You Win! ${playerSelection} beats ${computerSelection}`;
             } else {
                 endOfRound = 'Something went wrong with my logic!'
             }
 
-            return endOfRound; // "You Lose! Paper beats Rock"
+            return endOfRound;
         }
 
 
-        // Play a game of this many rounds
+        // Play a game of this many rounds and log each round's result to the console
         let game = function (numberOfRounds) {
             for (let i = 0; i < numberOfRounds; i++) {
                 let playerSelection = playerPlay();
                 let computerSelection = computerPlay();
-                console.log(playRound(playerSelection, computerSelection));
+                console.log(`Round ${i+1}: `, playRound(playerSelection, computerSelection));
             }
         }
 
 
         // Run the game
-        game(2);
+        game(5);
     </script>
 </body>
 
